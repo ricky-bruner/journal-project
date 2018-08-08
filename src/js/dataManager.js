@@ -22,4 +22,15 @@ function removeEntries(entryId){
     }).then(result => result.json())
 }
 
-module.exports = {saveEntry, fetchEntries, removeEntries};
+function replaceEntry(entry, entryId){
+    return fetch(`http://localhost:8088/entries/${entryId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entry)
+    })
+    .then(response => response.json())
+}
+
+module.exports = {saveEntry, fetchEntries, removeEntries, replaceEntry};
