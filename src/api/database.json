@@ -9,7 +9,7 @@
     {
       "title": "The Challenge of CRUD",
       "content": "C - creatable \nR - readable  \nU - updatable \nD - deletable  \n\nChallenges broken down: \n\n1. Render a Form \n2. If there are entries in the database already, render those below the form. \n2. Once an Entry is finished being created, save it to a database. \n3. Once that entry saves, render the Entry List from the database again so all entries show up. \n4. Add an option to delete an entry, from the DOM and the database. \n5. Make and entry editable, and save the changes to that entry on the database. \n6. Use Grunt and Browserify to write modular code, readable, and control the above actions from the main js file. \n7. Finally, style the page. \n\nDo this qualify as CRUD? I hope so!",
-      "date": "edited on: 08/09/2018 at 9:14:44 AM",
+      "date": "edited on: 08/09/2018 at 12:58:20 PM",
       "id": 2
     }
   ]
