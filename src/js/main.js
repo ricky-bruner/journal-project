@@ -5,20 +5,20 @@ let dataManager = require("./dataManager");
 let makeList = require("./entryManager");
 let getDate = require("./getDate");
 let editManager = require("./editManager");
-
+let $ = require("jquery");
 
 console.log("Hello");
 
-document.querySelector("#form").innerHTML = formManager.makeForm();
+$("#form").html(formManager.makeForm());
 
-document.querySelector("#add-entry-btn").addEventListener("click", () => {
+$("#add-entry-btn").click(() => {
     const newEntry = {
-        title: document.querySelector("#entryTitle").value,
-        content: document.querySelector("#entryContent").value,
+        title: $("#entryTitle").val(),
+        content: $("#entryContent").val(),
         date: getDate()
     };
-    let titleText = document.querySelector("#entryTitle").value;
-    let contentText = document.querySelector("#entryContent").value;
+    let titleText = $("#entryTitle").val();
+    let contentText = $("#entryContent").val();
     if(titleText === "" || contentText === ""){
         console.log("caught!");
     } else {
