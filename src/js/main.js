@@ -2,7 +2,7 @@
 
 let formManager = require("./journalForm");
 let dataManager = require("./dataManager");
-let makeList = require("./entryManager");
+let entryManager = require("./entryManager");
 let getDate = require("./getDate");
 let editManager = require("./editManager");
 let $ = require("jquery");
@@ -24,19 +24,19 @@ $("#add-entry-btn").click(() => {
     } else {
         dataManager.saveEntry(newEntry).then(() => {
             formManager.clearForm();
-            dataManager.fetchEntries().then((result) => {
-                makeList(result);
+            dataManager.getEntries().then((result) => {
+                entryManager.makeList(result);
             });
         });
     }
 });
 
-dataManager.fetchEntries().then((result) => {
-    makeList(result);
+dataManager.getEntries().then((result) => {
+    entryManager.makeList(result);
 });
 
 
-document.querySelector(".entry-list").addEventListener("click", (e) => {
+$(".entry-list").click((e) => {
     if(e.target.className === "delete-btn"){
         let entryId = e.target.id.split("--")[1];
         dataManager.removeEntries(entryId).then(() => {
@@ -49,20 +49,11 @@ document.querySelector(".entry-list").addEventListener("click", (e) => {
     if(e.target.className === "save-btn"){
         let entryId = e.target.id.split("--")[1];
         let entry = editManager.saveEditedEntry();
-        dataManager.replaceEntry(entry, entryId)
+        dataManager.replaceEntry(entryId, entry)
         .then(() => {
-            dataManager.fetchEntries().then((result) => {
-                makeList(result);
+            dataManager.getEntries().then((result) => {
+                entryManager.makeList(result);
             });
         });
     }
 });
-
-// ask about thicc arrow functions and why they dont work
-//
-//               /\        /\        /\
-//              /  \      /  \      /  \
-//               ||        ||        ||
-//               ||        ||        ||
-//              //\\      /  \      /  \
-//             ///\\\    ///\\\    ///\\\

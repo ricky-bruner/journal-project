@@ -1,10 +1,12 @@
 "use strict";
 
+let $ = require("jquery");
+
 const formManager = Object.create(null, {
     clearForm: {
         value: () => {
-            document.querySelector("#entryTitle").value = "";
-            document.querySelector("#entryContent").value = "";
+            $("#entryTitle").val() = "";
+            $("#entryContent").val() = "";
         }
     },
     makeForm: {
