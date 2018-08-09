@@ -10,7 +10,6 @@ function saveEditedEntry(){
 }
 
 function transformEntry(event){
-    console.log(event);
     let entryCard = event.target.parentElement.parentElement;
     let title = document.querySelector(`#title--${event.target.id.split("--")[1]}`);
     let content = document.querySelector(`#content--${event.target.id.split("--")[1]}`)

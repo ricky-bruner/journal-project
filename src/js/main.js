@@ -2,9 +2,10 @@
 
 let formManager = require("./journalForm");
 let dataManager = require("./dataManager");
-let makeEntry = require("./entryCard");
+let makeList = require("./entryManager");
 let getDate = require("./getDate");
-let editManager = require("./editEntry");
+let editManager = require("./editManager");
+
 
 console.log("Hello");
 
@@ -16,51 +17,43 @@ document.querySelector("#add-entry-btn").addEventListener("click", () => {
         content: document.querySelector("#entryContent").value,
         date: getDate()
     };
-    if(document.querySelector("#entryTitle").value === "" || document.querySelector("#entryContent").value === ""){
+    let titleText = document.querySelector("#entryTitle").value;
+    let contentText = document.querySelector("#entryContent").value;
+    if(titleText === "" || contentText === ""){
         console.log("caught!");
-        alert("Fill this shit out you dummie!");
     } else {
-        dataManager.saveEntry(newEntry).then((result) => {
+        dataManager.saveEntry(newEntry).then(() => {
             formManager.clearForm();
-            document.querySelector(".entry-list").innerHTML = "";
             dataManager.fetchEntries().then((result) => {
-                result.forEach(item => {
-                    document.querySelector(".entry-list").innerHTML += makeEntry(item);
-                });
+                makeList(result);
             });
         });
     }
 });
 
 dataManager.fetchEntries().then((result) => {
-    result.forEach(item => {
-        document.querySelector(".entry-list").innerHTML += makeEntry(item);
-        document.querySelector(".entry-list").addEventListener("click", (e) => {
-            if(e.target.id.split("--")[0] === "edit"){
-                editManager.transformEntry(e);
-                document.querySelector(".save-btn").addEventListener("click", (e) => {
-                    let entryId = e.target.id.split("--")[1];
-                    let entry = editManager.saveEditedEntry();
-                    dataManager.replaceEntry(entry, entryId)
-                    .then(() => {
-                        document.querySelector(".entry-list").innerHTML = "";
-                        dataManager.fetchEntries().then((result) => {
-                            result.forEach(item => {
-                                document.querySelector(".entry-list").innerHTML += makeEntry(item);
-                            });
-                        });
-                    });
-                });
-            }
-        });
-    });
+    makeList(result);
 });
+
 
 document.querySelector(".entry-list").addEventListener("click", (e) => {
     if(e.target.className === "delete-btn"){
         let entryId = e.target.id.split("--")[1];
         dataManager.removeEntries(entryId).then(() => {
             e.target.parentElement.parentElement.remove();
+        });
+    }
+    if(e.target.id.split("--")[0] === "edit"){
+        editManager.transformEntry(e);
+    }
+    if(e.target.className === "save-btn"){
+        let entryId = e.target.id.split("--")[1];
+        let entry = editManager.saveEditedEntry();
+        dataManager.replaceEntry(entry, entryId)
+        .then(() => {
+            dataManager.fetchEntries().then((result) => {
+                makeList(result);
+            });
         });
     }
 });
