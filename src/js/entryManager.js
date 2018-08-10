@@ -18,7 +18,7 @@ const entryManager = Object.create(null, {
         value: (data) => {
             document.querySelector(".entry-list").innerHTML = "";
             data.forEach(item => {
-                document.querySelector(".entry-list").innerHTML += makeEntry(item);
+                document.querySelector(".entry-list").innerHTML += entryManager.makeEntry(item);
             });
         }
     }

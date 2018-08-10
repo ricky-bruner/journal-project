@@ -4,11 +4,13 @@ let formManager = require("./formManager");
 let dataManager = require("./dataManager");
 let entryManager = require("./entryManager");
 let editManager = require("./editManager");
+let buildDOM = require("./DOMManager");
 let getDate = require("./getDate");
 
 
 console.log("Hello");
 
+buildDOM();
 document.querySelector("#form").innerHTML = formManager.makeForm();
 
 document.querySelector("#add-entry-btn").addEventListener("click", () => {

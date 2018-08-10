@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to bottom, #bdc3c7, #2c3e50);
+    background: linear-gradient(to top, #bdc3c7, #2c3e50, #2c3e50);
 }
 
 /*--------------- form styles ------------------*/
@@ -13,15 +13,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(to top, #00b4db, #0083b0);
+    background: linear-gradient(to bottom, #ffefba, #19547b);
     border-radius: 10px;
     box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6);
 }
 
 #form h2 {
-    color: rgb(228, 248, 255);
-    font-size: 2em;
-    text-shadow: black 1px 1px;
+    color: #19547b;
+    font-size: 2.8em;
+    margin: 0 auto;
+    text-shadow: black .5px .5px;
 }
 
 input,
