@@ -1,10 +1,10 @@
 "use strict";
 
-let formManager = require("./journalForm");
+let formManager = require("./formManager");
 let dataManager = require("./dataManager");
-let makeList = require("./entryManager");
-let getDate = require("./getDate");
+let entryManager = require("./entryManager");
 let editManager = require("./editManager");
+let getDate = require("./getDate");
 
 
 console.log("Hello");
@@ -24,22 +24,22 @@ document.querySelector("#add-entry-btn").addEventListener("click", () => {
     } else {
         dataManager.saveEntry(newEntry).then(() => {
             formManager.clearForm();
-            dataManager.fetchEntries().then((result) => {
-                makeList(result);
+            dataManager.getEntries().then((result) => {
+                entryManager.makeList(result);
             });
         });
     }
 });
 
-dataManager.fetchEntries().then((result) => {
-    makeList(result);
+dataManager.getEntries().then((result) => {
+    entryManager.makeList(result);
 });
 
 
 document.querySelector(".entry-list").addEventListener("click", (e) => {
     if(e.target.className === "delete-btn"){
         let entryId = e.target.id.split("--")[1];
-        dataManager.removeEntries(entryId).then(() => {
+        dataManager.removeEntry(entryId).then(() => {
             e.target.parentElement.parentElement.remove();
         });
     }
@@ -49,20 +49,11 @@ document.querySelector(".entry-list").addEventListener("click", (e) => {
     if(e.target.className === "save-btn"){
         let entryId = e.target.id.split("--")[1];
         let entry = editManager.saveEditedEntry();
-        dataManager.replaceEntry(entry, entryId)
+        dataManager.replaceEntry(entryId, entry)
         .then(() => {
-            dataManager.fetchEntries().then((result) => {
-                makeList(result);
+            dataManager.getEntries().then((result) => {
+                entryManager.makeList(result);
             });
         });
     }
 });
-
-// ask about thicc arrow functions and why they dont work
-//
-//               /\        /\        /\
-//              /  \      /  \      /  \
-//               ||        ||        ||
-//               ||        ||        ||
-//              //\\      /  \      /  \
-//             ///\\\    ///\\\    ///\\\
