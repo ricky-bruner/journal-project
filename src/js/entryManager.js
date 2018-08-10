@@ -20,7 +20,7 @@ const entryManager = Object.create(null, {
         value: (data) => {
             $(".entry-list").empty();
             data.forEach(item => {
-                $(".entry-list").append(makeEntry(item));
+                $(".entry-list").append(entryManager.makeEntry(item));
             });
         }
     }

@@ -5,8 +5,8 @@ let $ = require("jquery");
 const formManager = Object.create(null, {
     clearForm: {
         value: () => {
-            $("#entryTitle").val() = "";
-            $("#entryContent").val() = "";
+            $("#entryTitle").val("");
+            $("#entryContent").val("");
         }
     },
     makeForm: {

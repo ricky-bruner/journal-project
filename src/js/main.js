@@ -1,10 +1,10 @@
 "use strict";
 
-let formManager = require("./journalForm");
+let formManager = require("./formManager");
 let dataManager = require("./dataManager");
 let entryManager = require("./entryManager");
-let getDate = require("./getDate");
 let editManager = require("./editManager");
+let getDate = require("./getDate");
 let $ = require("jquery");
 
 console.log("Hello");
